@@ -1,21 +1,15 @@
 import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn } from "typeorm";
 
-@Entity()
-export class Posts {
+@Entity('users')
+export class User {
     @PrimaryGeneratedColumn()
     id: number;
+    
+    @Column()
+    username: string;
 
     @Column()
-    title: string;
-
-    @Column()
-    description: string;
-
-    @Column()
-    modelKitName: string;
-
-    @Column()
-    image: string;
+    password: string;
 
     @CreateDateColumn()
     createdAt: Date;

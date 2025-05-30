@@ -5,16 +5,18 @@ import { UserService } from './services/user/user.service';
 import { AuthService } from './services/auth/auth.service';
 import { UserController } from './user/user.controller';
 import { TypeOrmModule} from '@nestjs/typeorm';
-import { Post } from './entities/posts.entity';
+import { Posts } from './entities/posts.entity';
+import { User } from './entities/user.entity';
+import { PostModule } from './post/post.module';
 
 @Module({
   imports: [TypeOrmModule.forRoot({
     type: 'sqlite',
     database: '../database.sqlite',
-    entities: [Post],
+    entities: [Posts, User],
     logging: true,
     synchronize: true,
-  })],
+  }), PostModule],
   controllers: [AppController, UserController],
   providers: [AppService, UserService, AuthService],
 })
