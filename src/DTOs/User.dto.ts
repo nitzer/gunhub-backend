@@ -1,18 +1,23 @@
-import { IsAlphanumeric, IsEmail, IsNotEmpty, MaxLength, MinLength } from "class-validator";
+import { IsAlphanumeric, IsEmail, IsEmpty, IsNotEmpty, MaxLength, MinLength } from "class-validator";
 
 export class UserDTO {
+    @IsEmpty()
+    readonly id: number;
+
     @IsNotEmpty()
     @IsAlphanumeric()
     @MinLength(4)
     @MaxLength(20)
-    username: string;
+    readonly username: string;
 
     @IsAlphanumeric()
     @IsNotEmpty()
     @MinLength(8)
-    password: string;
+    readonly password: string;
 
     @IsEmail()
     @IsNotEmpty()
-    email: string;
+    readonly email: string;
+
+    createdAt?: string;
 }
