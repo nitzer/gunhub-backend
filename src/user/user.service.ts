@@ -18,6 +18,8 @@ export class UserService {
         if (!user) {
             throw new NotFoundException(`user with id ${id} not found`);
         }
+
+        return user;
     }
 
     async login(credentials: UserLoginDTO) {
@@ -53,7 +55,21 @@ export class UserService {
         })
     }
 
-    async findByUsername(username: string): Promise<User> {
-        return await this.userRepository.findOneByOrFail({username});
+    async findByUsername(username: string, includePosts: boolean): Promise<User> {
+        let query = {
+            where: {username},
+        };
+
+        if (includePosts) {
+            query['relations'] = {posts: true}
+        }
+
+        const user = await this.userRepository.findOne(query);
+
+        if (!user) {
+            throw new NotFoundException();
+        }
+
+        return user;
     }
 }

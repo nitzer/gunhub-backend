@@ -1,5 +1,4 @@
 import { Body, Controller, Get, Post, Req, UseGuards, UseInterceptors } from '@nestjs/common';
-import { UserLoginDTO } from 'src/DTOs/user-login.dto';
 import { UserDTO } from 'src/DTOs/User.dto';
 import { UserService } from './user.service';
 import { PasswordInterceptor } from './interceptors/password/password.interceptor';
@@ -33,7 +32,9 @@ export class UserController {
 
     @UseGuards(AuthGuard)
     @Get('/me')
-    getProfile(@Req() request) {
-        return request.user;
+    async getProfile(@Req() request) {
+        const {password, ...userData } = await this.userService.findByUsername(request.user.username, true);
+    
+        return userData;
     }
 }

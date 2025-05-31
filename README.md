@@ -52,4 +52,4 @@ here's a list of features that may be added in the future:
 - Implement the config module and remove hardcoded variables form within the project.
 - Add a related list of tools/assets used for the picture, like paints, nippers, sanding tools, etc
 - notify users when a like happened
-- Allow following users and only get notifications of them (and learn websockets ;p )
+- Allow following users and only get notifications of them (and learn websockets ;p)

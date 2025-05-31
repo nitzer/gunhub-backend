@@ -17,13 +17,14 @@ export class PostService {
         });
     }
 
-    async add(newPost: PostCreateDTO) {
+    async add(newPost: PostCreateDTO, user) {
         const {title, description, modelKitName, image} = newPost;
         const post = this.postRepository.create({
             title,
             description,
             modelKitName,
             image,
+            user
         });
 
         return await this.postRepository.save(post);

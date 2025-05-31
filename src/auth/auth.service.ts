@@ -13,7 +13,7 @@ export class AuthService {
     ){}
 
     async login(credentials: UserLoginDTO) {
-        const user = await this.userService.findByUsername(credentials.username);
+        const user = await this.userService.findByUsername(credentials.username, false);
 
         if (!user) {
             throw new ForbiddenException("Incorrect credentials.");
@@ -31,5 +31,8 @@ export class AuthService {
         return {
             access_token: await this.jwtService.signAsync(payload),
         };
+    }
+
+    async logout() {
     }
 }
