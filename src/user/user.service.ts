@@ -52,4 +52,8 @@ export class UserService {
             order: {createdAt: 'desc'}
         })
     }
+
+    async findByUsername(username: string): Promise<User> {
+        return await this.userRepository.findOneByOrFail({username});
+    }
 }

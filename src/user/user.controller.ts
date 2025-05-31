@@ -1,8 +1,9 @@
-import { Body, Controller, Get, Post, UseInterceptors } from '@nestjs/common';
+import { Body, Controller, Get, Post, Req, UseGuards, UseInterceptors } from '@nestjs/common';
 import { UserLoginDTO } from 'src/DTOs/user-login.dto';
 import { UserDTO } from 'src/DTOs/User.dto';
 import { UserService } from './user.service';
 import { PasswordInterceptor } from './interceptors/password/password.interceptor';
+import { AuthGuard } from 'src/auth/auth.guard';
 
 @Controller('user')
 export class UserController {
@@ -30,8 +31,9 @@ export class UserController {
         return this.userService.list();
     }
 
-    @Post('login')
-    login(@Body() userLogin: UserLoginDTO) {
-        return this.userService.login(userLogin);
+    @UseGuards(AuthGuard)
+    @Get('/me')
+    getProfile(@Req() request) {
+        return request.user;
     }
 }
