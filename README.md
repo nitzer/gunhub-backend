@@ -16,7 +16,7 @@ this is a simple module that contains controllers for the api endpoitns, a servi
 ### Authentication:
 Authentication handles it's own controller that validates the user's credentials and generates a JWT token to be used by the client to continue it's usage (the JWT expires after 24 hours) and allows the user to maintain a session while this token is fresh
 
-## Post management:
+### Post management:
 This is a CRUD for posts, allows a user to upload a single post every 24 hours to maintain some quality over the amount of images users can post. this also handles the likes of the posts for the users (soon, with mongoose). emits an event when a user creates a new post, (does nothing, no emails yet).
 
 
@@ -26,13 +26,13 @@ This is a CRUD for posts, allows a user to upload a single post every 24 hours t
 $ npm install
 ```
 
-## create the .env file
+### create the .env file
 ```bash
 $ cp .env-example .env
 ```
 update the configuration files and update the jwt_secret `bro`
 
-## Compile and run the project
+### Compile and run the project
 
 ```bash
 # development
