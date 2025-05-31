@@ -1,17 +1,17 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post, UseInterceptors } from '@nestjs/common';
 import { UserLoginDTO } from 'src/DTOs/user-login.dto';
 import { UserDTO } from 'src/DTOs/User.dto';
-import { AuthService } from 'src/services/auth/auth.service';
-import { UserService } from 'src/services/user/user.service';
+import { UserService } from './user.service';
+import { PasswordInterceptor } from './interceptors/password/password.interceptor';
 
 @Controller('user')
 export class UserController {
     constructor(
         private readonly userService: UserService,
-        private readonly authService: AuthService,
     ) {}
 
     @Post('register')
+    @UseInterceptors(PasswordInterceptor)
     register(@Body() user:UserDTO) {
         try {
             this.userService.createUser(user);
@@ -25,8 +25,13 @@ export class UserController {
         }
     }
 
-    @Post()
+    @Get()
+    list() {
+        return this.userService.list();
+    }
+
+    @Post('login')
     login(@Body() userLogin: UserLoginDTO) {
-        this.authService.login(userLogin);
+        return this.userService.login(userLogin);
     }
 }
