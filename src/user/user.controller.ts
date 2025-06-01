@@ -18,13 +18,13 @@ export class UserController {
 
   @Post('register')
   @UseInterceptors(PasswordInterceptor)
-  register(@Body() user: UserDTO) {
+  async register(@Body() user: UserDTO) {
     try {
-      this.userService.createUser(user);
+      await this.userService.createUser(user);
       return {
         message: 'user created.',
       };
-    } catch (error) {
+    } catch {
       return {
         message: 'nope.',
       };

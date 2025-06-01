@@ -36,10 +36,7 @@ export class UserService {
     }
 
     if (
-      !(await this.cryptoService.comparePassword(
-        credentials.password,
-        user.password,
-      ))
+      !this.cryptoService.comparePassword(credentials.password, user.password)
     ) {
       throw new ForbiddenException('Incorrect password');
     }
