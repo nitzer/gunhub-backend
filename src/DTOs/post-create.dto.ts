@@ -1,18 +1,17 @@
-import { IsNotEmpty } from "class-validator";
-import { User } from "src/entities/user.entity";
-import { ManyToOne } from "typeorm";
+import { IsNotEmpty } from 'class-validator';
+import { User } from 'src/entities/user.entity';
 
 export class PostCreateDTO {
-    @IsNotEmpty()
-    title: string;
+  @IsNotEmpty()
+  title: string;
 
-    @IsNotEmpty()
-    description: string;
+  @IsNotEmpty()
+  description: string;
 
-    @IsNotEmpty()
-    modelKitName: string;
+  @IsNotEmpty()
+  modelKitName: string;
 
-    image: string;
+  image: string;
 
-    user: User
+  user: User;
 }

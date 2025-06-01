@@ -1,14 +1,14 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { TypeOrmModule} from '@nestjs/typeorm';
+import { TypeOrmModule } from '@nestjs/typeorm';
 import { Post } from './entities/post.entity';
 import { User } from './entities/user.entity';
 import { PostModule } from './post/post.module';
 import { UserModule } from './user/user.module';
 import { CryptoService } from './services/crypto/crypto.service';
-import { AuthService } from './auth/auth.service';
 import { AuthModule } from './auth/auth.module';
+import { PostSubscriber } from './post/subscribers/post.subscribers';
 
 @Module({
   imports: [
@@ -18,9 +18,13 @@ import { AuthModule } from './auth/auth.module';
       entities: [Post, User],
       logging: true,
       synchronize: true,
-    }), PostModule, UserModule, AuthModule],
-    controllers: [AppController],
-    providers: [AppService, CryptoService],
-  })
-  export class AppModule {}
-  
+      subscribers: [PostSubscriber],
+    }),
+    PostModule,
+    UserModule,
+    AuthModule,
+  ],
+  controllers: [AppController],
+  providers: [AppService, CryptoService],
+})
+export class AppModule {}
