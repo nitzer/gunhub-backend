@@ -53,7 +53,16 @@ export class PostService {
 
   async delete(id: number) {
     const post = await this.findOne(id);
+    return await this.postRepository.remove(post);
+  }
 
-    return await this.postRepository.delete(post);
+  async hasPostInLastDay(user: any) {
+    const result = await this.postRepository
+        .createQueryBuilder("posts")
+        .where(
+            "userId = :userId and createdAt > datetime('now', '-24 hour')", {userId: user.id},
+        ).getCount()
+
+        return result > 0;
   }
 }

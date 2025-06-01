@@ -15,6 +15,7 @@ export class AuthGuard implements CanActivate {
     private readonly userService: UserService,
   ) {}
   async canActivate(context: ExecutionContext): Promise<boolean> {
+    console.log('auth guard');
     const request = context.switchToHttp().getRequest();
     const token = this.extractTokenFromHeader(request);
 

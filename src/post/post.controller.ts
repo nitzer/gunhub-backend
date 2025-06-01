@@ -14,6 +14,7 @@ import { PostService } from './post.service';
 import { PostCreateDTO } from 'src/DTOs/post-create.dto';
 import { PostUpdateDTO } from 'src/DTOs/post-update.dto';
 import { AuthGuard } from 'src/auth/auth.guard';
+import { DayLimitGuard } from './guards/day-limit/day-limit.guard';
 
 @Controller('post')
 export class PostController {
@@ -29,7 +30,7 @@ export class PostController {
     return await this.postService.findOne(id);
   }
 
-  @UseGuards(AuthGuard)
+  @UseGuards(AuthGuard, DayLimitGuard)
   @Post('create')
   async create(@Body() post: PostCreateDTO, @Request() req: Request) {
     await this.postService.add(post, req['user']);

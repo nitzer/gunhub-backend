@@ -23,7 +23,7 @@ export class AuthService {
     }
 
     if (
-      !(await this.cryptoService.comparePassword(
+      !(this.cryptoService.comparePassword(
         credentials.password,
         user.password,
       ))

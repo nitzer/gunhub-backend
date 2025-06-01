@@ -22,10 +22,11 @@ import { UserModule } from 'src/user/user.module';
   providers: [
     AuthService,
     CryptoService,
-    {
-      provide: APP_GUARD,
-      useClass: AuthGuard,
-    },
+    // // This makes the AuthGuard globally available.
+    // {
+    //   provide: APP_GUARD,
+    //   useClass: AuthGuard,
+    // },
   ],
   exports: [AuthService],
 })

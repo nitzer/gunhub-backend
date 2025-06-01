@@ -9,6 +9,7 @@ import { UserModule } from './user/user.module';
 import { CryptoService } from './services/crypto/crypto.service';
 import { AuthModule } from './auth/auth.module';
 import { PostSubscriber } from './post/subscribers/post.subscribers';
+import { AuthController } from './auth/auth.controllers';
 
 @Module({
   imports: [
@@ -24,7 +25,11 @@ import { PostSubscriber } from './post/subscribers/post.subscribers';
     UserModule,
     AuthModule,
   ],
-  controllers: [AppController],
+  controllers: [AppController, AuthController],
   providers: [AppService, CryptoService],
 })
-export class AppModule {}
+export class AppModule {
+  constructor(){
+    console.log('o0o0o')
+  }
+}
