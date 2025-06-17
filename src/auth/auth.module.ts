@@ -3,8 +3,6 @@ import { CryptoService } from 'src/services/crypto/crypto.service';
 import { AuthService } from './auth.service';
 import { JwtModule } from '@nestjs/jwt';
 import { AuthController } from './auth.controllers';
-import { AuthGuard } from './auth.guard';
-import { APP_GUARD } from '@nestjs/core';
 import { UserModule } from 'src/user/user.module';
 
 @Module({
@@ -19,15 +17,7 @@ import { UserModule } from 'src/user/user.module';
     UserModule,
   ],
   controllers: [AuthController],
-  providers: [
-    AuthService,
-    CryptoService,
-    // // This makes the AuthGuard globally available.
-    // {
-    //   provide: APP_GUARD,
-    //   useClass: AuthGuard,
-    // },
-  ],
+  providers: [AuthService, CryptoService],
   exports: [AuthService],
 })
 export class AuthModule {}
