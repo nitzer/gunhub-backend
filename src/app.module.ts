@@ -29,7 +29,4 @@ import { AuthController } from './auth/auth.controllers';
   providers: [AppService, CryptoService],
 })
 export class AppModule {
-  constructor(){
-    console.log('o0o0o')
-  }
 }
